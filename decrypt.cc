@@ -5,13 +5,14 @@
 #include <fstream>
 #include <iostream>
 #include <iterator>
+#include <utility>
 
 #include <cctype>
 
 bool isPlainText(const std::string& s)
 {
   for(auto&& c : s)
-    if( c < 32 )
+    if( c < 32 && c != '\n' )
       return false;
 
   return true;
@@ -28,7 +29,7 @@ unsigned int numEnglishCharacters(const std::string& s)
   return count;
 }
 
-void decrypt(const std::string& s)
+std::pair<unsigned int, std::string> decrypt(const std::string& s)
 {
   std::string bytes = toBytes(s.c_str(), s.length());
 
@@ -51,8 +52,7 @@ void decrypt(const std::string& s)
     }
   }
 
-  std::cout << score << "\n";
-  std::cout << candidate << "\n";
+  return std::make_pair(score, candidate);
 }
 
 int main(int argc, char* argv[])
@@ -65,8 +65,25 @@ int main(int argc, char* argv[])
   std::istream_iterator<std::string> it( in );
   std::istream_iterator<std::string> end;
 
+  unsigned int score = 0;
+  std::string candidate;
+
   for( ; it != end; ++it )
-    decrypt(*it);
+  {
+    unsigned int s;
+    std::string result;
+
+    std::tie( s, result ) = decrypt(*it);
+
+    if( s > score )
+    {
+      score     = s;
+      candidate = result;
+    }
+  }
+
+  std::cout << "Candidate [" << candidate << "]" << " with a score of "
+            << score << "\n";
 
   return 0;
 }
