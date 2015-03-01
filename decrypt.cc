@@ -2,8 +2,11 @@
 #include "frequencies.hh"
 #include "xor.hh"
 
-#include <cctype>
+#include <fstream>
 #include <iostream>
+#include <iterator>
+
+#include <cctype>
 
 bool isPlainText(const std::string& s)
 {
@@ -25,10 +28,9 @@ unsigned int numEnglishCharacters(const std::string& s)
   return count;
 }
 
-int main(int, char**)
+void decrypt(const std::string& s)
 {
-  std::string in = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736";
-  std::string bytes = toBytes(in.c_str(), in.length());
+  std::string bytes = toBytes(s.c_str(), s.length());
 
   std::string candidate;
   unsigned int score = 0;
@@ -51,6 +53,20 @@ int main(int, char**)
 
   std::cout << score << "\n";
   std::cout << candidate << "\n";
+}
+
+int main(int argc, char* argv[])
+{
+  if( argc == 1 )
+    return -1;
+
+  std::ifstream in(argv[1]);
+
+  std::istream_iterator<std::string> it( in );
+  std::istream_iterator<std::string> end;
+
+  for( ; it != end; ++it )
+    decrypt(*it);
 
   return 0;
 }
