@@ -4,3 +4,4 @@ PROJECT( CryptoPals )
 SET( CMAKE_CXX_FLAGS "-std=c++11" )
 
 ADD_EXECUTABLE( test_conversions test_conversions.cc )
+ADD_EXECUTABLE( test_xor         test_xor.cc )
