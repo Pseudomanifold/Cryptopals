@@ -1,9 +1,10 @@
 #ifndef CONVERSIONS_HH__
 #define CONVERSIONS_HH__
 
+#include <iostream>
 #include <string>
 
-unsigned int hexToDec( char c )
+char hexToDec( char c )
 {
   if( '0' <= c && c <= '9' )
     return c - '0';
@@ -11,6 +12,23 @@ unsigned int hexToDec( char c )
     return c - 'A' + 10;
   else
     return c - 'a' + 10;
+}
+
+std::string toBytes( const char* hexString, unsigned int length )
+{
+  std::string result;
+
+  for( unsigned int i = 0; i < length; i += 2 )
+  {
+    char high = hexString[i];
+    char low  = hexString[i+1];
+
+    char hex  = (hexToDec(high) << 4) + hexToDec(low);
+
+    result.push_back(hex);
+  }
+
+  return result;
 }
 
 const char* base64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
