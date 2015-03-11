@@ -1,3 +1,4 @@
 ADD_SUBDIRECTORY( algorithms )
 ADD_SUBDIRECTORY( common )
 ADD_SUBDIRECTORY( conversions )
+ADD_SUBDIRECTORY( tools )

@@ -4,6 +4,7 @@
 #include <common/types.hh>
 
 #include <iterator>
+#include <string>
 
 namespace crypto
 {
@@ -23,6 +24,9 @@ template <class InputIterator> ByteArray toBytes( InputIterator begin, InputIter
 
   return bytes;
 }
+
+/** Converts a byte array to a string.  */
+std::string toString( const ByteArray& bytes );
 
 }
 
