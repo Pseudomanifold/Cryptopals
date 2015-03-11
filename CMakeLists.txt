@@ -7,3 +7,8 @@ ADD_EXECUTABLE( test_conversions test_conversions.cc )
 ADD_EXECUTABLE( test_xor         test_xor.cc )
 
 ADD_EXECUTABLE( decrypt decrypt.cc )
+
+INCLUDE_DIRECTORIES( ${CryptoPals_SOURCE_DIR}/source )
+
+ADD_SUBDIRECTORY( source )
+ADD_SUBDIRECTORY( tests )
