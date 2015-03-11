@@ -9,6 +9,7 @@ ADD_EXECUTABLE( test_xor         test_xor.cc )
 ADD_EXECUTABLE( decrypt decrypt.cc )
 
 INCLUDE_DIRECTORIES( ${CryptoPals_SOURCE_DIR}/source )
+ENABLE_TESTING()
 
 ADD_SUBDIRECTORY( source )
 ADD_SUBDIRECTORY( tests )

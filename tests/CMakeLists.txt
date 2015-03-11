@@ -1,0 +1,4 @@
+ADD_EXECUTABLE( base64 base64.cc )
+TARGET_LINK_LIBRARIES( base64 conversions )
+
+ADD_TEST( NAME base64 COMMAND base64 )
