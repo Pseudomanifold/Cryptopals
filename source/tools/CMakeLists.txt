@@ -1,5 +1,6 @@
 SET( TOOLS_SRC
   decrypt_single_byte_xor.cc
+  detect_single_byte_xor.cc
 )
 
 ADD_LIBRARY( tools ${TOOLS_SRC} )

@@ -2,6 +2,7 @@
 #define CRYPTO_DECRYPT_SINGLE_BYTE_XOR_HH__
 
 #include <string>
+#include <utility>
 
 namespace crypto
 {
@@ -11,7 +12,7 @@ namespace crypto
   character, finds the key and decrypts the message.
 */
 
-std::string decryptSingleByteXOR( const std::string& s );
+std::pair<unsigned int, std::string> decryptSingleByteXOR( const std::string& s );
 
 }
 
