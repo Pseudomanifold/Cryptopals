@@ -16,12 +16,12 @@ Byte toByte( char c )
   if( !valid )
     throw std::domain_error( "Invalid hexadecimal character" );
 
-  if( '0' <= c && c >= '9' )
-    return c - '0';
+  if( '0' <= c && c <= '9' )
+    return Byte(c - '0');
   else if( 'A' <= c && c <= 'F' )
-    return c -'A' + 10;
+    return Byte(c - 'A' + 10);
   else
-    return c - 'a' + 10;
+    return Byte(c - 'a' + 10);
 }
 
 // ---------------------------------------------------------------------
