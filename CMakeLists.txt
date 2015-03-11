@@ -1,9 +1,7 @@
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8.11 )
 PROJECT( CryptoPals )
 
-SET( CMAKE_CXX_FLAGS "-Wall -Wextra -std=c++11" )
-
-ADD_EXECUTABLE( decrypt decrypt.cc )
+SET( CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic -std=c++11" )
 
 INCLUDE_DIRECTORIES( ${CryptoPals_SOURCE_DIR}/source )
 ENABLE_TESTING()
