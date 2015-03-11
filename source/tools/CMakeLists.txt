@@ -1,6 +1,7 @@
 SET( TOOLS_SRC
   decrypt_single_byte_xor.cc
   detect_single_byte_xor.cc
+  hamming_distance.cc
 )
 
 ADD_LIBRARY( tools ${TOOLS_SRC} )
