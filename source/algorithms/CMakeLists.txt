@@ -3,4 +3,3 @@ SET( ALGORITHMS_SRC
 )
 
 ADD_LIBRARY( algorithms ${ALGORITHMS_SRC} )
-TARGET_LINK_LIBRARIES( algorithms common )
