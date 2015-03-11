@@ -1,4 +1,5 @@
 #include <conversions/base64.hh>
+#include <conversions/bytes.hh>
 
 #include <string>
 
@@ -14,6 +15,12 @@ int main(int, char**)
                     "dGhlIG1pbmQsIHRoYXQgYnkgYSBwZXJzZXZlcmFuY2Ugb2YgZGVsaWdodCBpbiB0aGUgY29udGlu"
                     "dWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRo"
                     "ZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4=";
+
+  crypto::ByteArray bytes = crypto::toBytes( in.begin(), in.end() );
+  std::string base64      = crypto::toBase64( bytes );
+
+  if( base64 != out )
+    return -1;
 
   return 0;
 }
