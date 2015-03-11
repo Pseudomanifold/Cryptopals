@@ -2,6 +2,8 @@
 #include <conversions/bytes.hh>
 #include <conversions/hex.hh>
 
+#include <iomanip>
+#include <sstream>
 #include <string>
 
 int main(int, char**)
@@ -32,6 +34,17 @@ int main(int, char**)
 
     if( crypto::toBase64( bytes ) != base64 )
       return -2;
+
+    crypto::ByteArray base64Decoded = crypto::fromBase64( base64 );
+    {
+      std::ostringstream stream;
+      stream << std::hex;
+      for( auto&& byte : base64Decoded )
+        stream << std::setfill('0') << std::setw(2) << static_cast<unsigned>( byte );
+
+      if( hex != stream.str() )
+        return -3;
+    }
   }
 
   return 0;

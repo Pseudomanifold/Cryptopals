@@ -16,6 +16,9 @@ namespace crypto
 
 std::string toBase64( const ByteArray& bytes );
 
+/** Converts a given Base64-encoded string to the corresponding byte array. */
+ByteArray fromBase64( const std::string& string );
+
 }
 
 #endif
