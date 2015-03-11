@@ -3,8 +3,6 @@ PROJECT( CryptoPals )
 
 SET( CMAKE_CXX_FLAGS "-Wall -Wextra -std=c++11" )
 
-ADD_EXECUTABLE( test_xor         test_xor.cc )
-
 ADD_EXECUTABLE( decrypt decrypt.cc )
 
 INCLUDE_DIRECTORIES( ${CryptoPals_SOURCE_DIR}/source )
