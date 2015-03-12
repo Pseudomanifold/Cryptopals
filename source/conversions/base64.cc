@@ -81,8 +81,12 @@ ByteArray fromBase64( const std::string& string )
     Byte l = ( (c & 0x03) << 6) + ( (d & 0x3F) );
 
     bytes.push_back(j);
-    bytes.push_back(k);
-    bytes.push_back(l);
+    if( string[i+2] != '=' )
+    {
+      bytes.push_back(k);
+      if( string[i+3] != '=' )
+        bytes.push_back(l);
+    }
   }
 
   return bytes;

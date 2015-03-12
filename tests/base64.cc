@@ -25,6 +25,20 @@ int main(int, char**)
 
     if( base64 != out )
       return -1;
+
+    crypto::ByteArray base64Decoded = crypto::fromBase64( out );
+
+    if( base64Decoded.size() != in.size() )
+      return -1;
+
+    {
+      std::ostringstream stream;
+      for( auto&& byte : base64Decoded )
+        stream << static_cast<char>( byte );
+
+      if( stream.str() != in )
+        return -1;
+    }
   }
 
   {
