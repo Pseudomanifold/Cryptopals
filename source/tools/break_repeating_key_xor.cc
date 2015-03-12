@@ -1,8 +1,10 @@
 #include "break_repeating_key_xor.hh"
 #include "decrypt_single_byte_xor.hh"
+#include "frequency_analysis.hh"
 #include "hamming_distance.hh"
 
-#include <iostream>
+#include <algorithms/xor.hh>
+#include <conversions/bytes.hh>
 
 #include <algorithm>
 #include <map>
@@ -61,6 +63,8 @@ ByteArray breakRepeatingKeyXOR( const ByteArray& bytes,
   if( keySizes.size() > 4 )
     keySizes.erase( keySizes.begin() + 4, keySizes.end() );
 
+  std::vector<ByteArray> keyCandidates;
+
   for( auto&& keySize : keySizes )
   {
     std::vector<ByteArray> blocks;
@@ -102,12 +106,26 @@ ByteArray breakRepeatingKeyXOR( const ByteArray& bytes,
       keyBytes.push_back( byte );
     }
 
-    std::cout << "Cracked key: *";
+    keyCandidates.push_back( keyBytes );
+  }
 
-    for( auto&& byte : keyBytes )
-      std::cout << static_cast<char>( byte );
+  for( auto&& candidate : keyCandidates )
+  {
+    auto decryptedBytes  = repeatingKeyXOR( bytes, candidate );
+    auto keyString       = toString( candidate );
+    auto decryptedString = toString( decryptedBytes );
 
-    std::cout << "\n";
+    auto frequencies = sortedEightBitFrequencies( decryptedBytes );
+
+    if( std::find_if( frequencies.begin(), frequencies.begin() + 4,
+                      [] ( std::pair<char, double> pair )
+                      {
+                        return pair.first == 'E' && pair.second > 0.035;
+                      } ) != frequencies.begin() + 4 )
+    {
+      result = candidate;
+      break;
+    }
   }
 
   return result;
