@@ -21,7 +21,7 @@ std::pair<std::string, std::string> detectSingleByteXOR( const std::vector<std::
     unsigned int s = 0;
     std::string str;
 
-    std::tie( s, str ) = decryptSingleByteXOR(string);
+    std::tie( std::ignore, s, str ) = decryptSingleByteXOR(string);
 
     if( s > score )
     {

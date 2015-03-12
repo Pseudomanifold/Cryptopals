@@ -38,17 +38,18 @@ namespace crypto
 
 // ---------------------------------------------------------------------
 
-std::pair<unsigned int, std::string> decryptSingleByteXOR( const std::string& s )
+std::tuple<Byte, unsigned int, std::string> decryptSingleByteXOR( const std::string& s )
 {
   return decryptSingleByteXOR( hexToBytes(s) );
 }
 
 // ---------------------------------------------------------------------
 
-std::pair<unsigned int, std::string> decryptSingleByteXOR( const ByteArray& bytes )
+std::tuple<Byte, unsigned int, std::string> decryptSingleByteXOR( const ByteArray& bytes )
 {
   std::string candidate;
   unsigned int score = 0;
+  Byte keyByte = 0;
 
   for( unsigned short k = 0; k < 256; k ++)
   {
@@ -65,10 +66,11 @@ std::pair<unsigned int, std::string> decryptSingleByteXOR( const ByteArray& byte
     {
       score     = s;
       candidate = str;
+      keyByte   = static_cast<Byte>( k );
     }
   }
 
-  return std::make_pair(score, candidate);
+  return std::make_tuple(keyByte, score, candidate);
 }
 
 // ---------------------------------------------------------------------
