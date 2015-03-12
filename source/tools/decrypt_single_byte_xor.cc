@@ -40,8 +40,13 @@ namespace crypto
 
 std::pair<unsigned int, std::string> decryptSingleByteXOR( const std::string& s )
 {
-  ByteArray bytes = hexToBytes(s);
+  return decryptSingleByteXOR( hexToBytes(s) );
+}
 
+// ---------------------------------------------------------------------
+
+std::pair<unsigned int, std::string> decryptSingleByteXOR( const ByteArray& bytes )
+{
   std::string candidate;
   unsigned int score = 0;
 
@@ -67,5 +72,6 @@ std::pair<unsigned int, std::string> decryptSingleByteXOR( const std::string& s 
 }
 
 // ---------------------------------------------------------------------
+
 
 }
