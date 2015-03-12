@@ -1,4 +1,5 @@
 SET( TOOLS_SRC
+  break_repeating_key_xor.cc
   decrypt_single_byte_xor.cc
   detect_single_byte_xor.cc
   hamming_distance.cc
