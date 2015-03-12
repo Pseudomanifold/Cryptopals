@@ -27,7 +27,7 @@ unsigned int numPrintableCharacters( const std::string& s )
   return std::count_if( s.begin(), s.end(),
                         [] (char c)
                         {
-                          return std::isalnum(c) || std::isspace(c);
+                          return std::isalnum(c) || std::isspace(c) || c == ',' || c == ';' || c == '.' || c == '\'';
                         } );
 }
 
@@ -74,6 +74,5 @@ std::tuple<Byte, unsigned int, std::string> decryptSingleByteXOR( const ByteArra
 }
 
 // ---------------------------------------------------------------------
-
 
 }
